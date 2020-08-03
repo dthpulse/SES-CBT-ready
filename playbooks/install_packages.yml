@@ -20,6 +20,9 @@
 - hosts: "{{ master }}"
   user: root
   become: True
+  var_files:
+    - ../vars/global.yml
+    - ../vars/install_packages.yml
   tasks:
     - name: install packages for master
       zypper:
@@ -29,6 +32,9 @@
 - hosts: "{{ client }}"
   user: root
   become: True
+  var_files:
+    - ../vars/global.yml
+    - ../vars/install_packages.yml
   tasks:
     - name: ceph-common on client
       zypper:
