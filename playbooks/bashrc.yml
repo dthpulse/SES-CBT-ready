@@ -1,7 +1,7 @@
 - hosts: all
   user: root
   become: True
-  vars_file:
+  vars_files:
     - ../vars/bashrc.yml
   vars:
     bashrc_file: |
