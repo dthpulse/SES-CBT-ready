@@ -1,0 +1,14 @@
+- hosts: all
+  user: root
+  become: True
+  vars_files:
+    - ../vars/add_repos.yml
+  tasks:
+    - name: SUSE devel
+      zypper_repository:
+        name: "{{ item.name }}"
+        repo: "{{ item.url }}"
+        state: present
+        auto_import_keys: yes
+        disable_gpg_check: yes
+      with_items: "{{ repositories }}"

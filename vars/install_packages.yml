@@ -1,0 +1,13 @@
+all_nodes_packages:
+  - jq
+  - ca-certificates-suse
+  - salt-minion
+  - pdsh
+  - fio
+  - iftop
+  - collectl
+  - python3-lxml
+all_nodes_patterns:
+  - devel_basis
+master_packages:
+  - ceph-salt

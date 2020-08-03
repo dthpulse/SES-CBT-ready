@@ -1,0 +1,6 @@
+- hosts: all
+  user: root
+  become: True
+  tasks:
+    - name: creates file
+      command: touch /root/hahahehe

@@ -1,0 +1,3 @@
+master_bashrc: master="master.sestest"
+monitors_bashrc: monitors="monitor1.sestest monitor2.sestest monitor3.sestest"
+osd_nodes_bashrc: osd_nodes="osd-node1 osd-node2 osd-node3 osd-node4 osd-node5"

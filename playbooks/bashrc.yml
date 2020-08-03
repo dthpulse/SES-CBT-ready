@@ -1,0 +1,18 @@
+- hosts: all
+  user: root
+  become: True
+  vars_file:
+    - ../vars/bashrc.yml
+  vars:
+    bashrc_file: |
+      export {{ master_bashrc }}
+      export {{ osd_nodes_bashrc }}
+      export {{ monitors_bashrc }}
+  tasks:
+    - name: bashrc
+      copy: 
+        content: "{{ bashrc_file }}"
+        dest: /root/.bashrc
+        owner: root
+        group: root
+        mode: 0644

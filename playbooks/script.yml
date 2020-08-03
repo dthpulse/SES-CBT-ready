@@ -1,0 +1,6 @@
+- hosts: all
+  user: root
+  become: True
+  tasks:
+    - name: script
+      script: /root/test.sh

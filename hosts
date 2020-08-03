@@ -1,0 +1,24 @@
+all:
+  hosts:
+    master.sestest:
+    monitor[1:3].sestest:
+    osd-node[1:5].sestest:
+    callisto.qa.suse.cz:
+  children:
+    sescluster:
+      hosts:
+        master.sestest:
+        monitor[1:3].sestest:
+        osd-node[1:5].sestest:
+    master:
+      hosts:
+        master.sestest:
+    client:
+      hosts:
+        callisto.qa.suse.cz:
+    monitors:
+      hosts:
+        monitor[1:3].sestest:
+    osdnodes:
+      hosts:
+        osd-node[1:5].sestest:

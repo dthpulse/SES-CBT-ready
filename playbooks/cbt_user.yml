@@ -1,0 +1,57 @@
+- hosts: all
+  user: root
+  become: True
+  vars_files:
+    - ../vars/cbt_user.yml
+  tasks:
+    - name: create cbt group
+      group:
+        name: cbt
+        state: present
+    - name: create cbt user
+      user: 
+        name: cbt
+        group: cbt
+        password: cbt
+        shell: /bin/bash
+        state: present
+    - name: sudo without password for cbt user
+      copy:
+        content: 'cbt ALL=(ALL) NOPASSWD:ALL'
+        dest: /etc/sudoers.d/cbt
+        mode: '0440'
+    - name: Create a directory .ssh if it does not exist
+      file:
+        path: /home/cbt/.ssh
+        state: directory
+        owner: cbt
+        group: cbt
+        mode: '0700'
+    - name: create ssh key
+      copy: 
+        dest: /home/cbt/.ssh/id_rsa
+        content: "{{ private_key }}" 
+        owner: cbt
+        group: cbt
+        mode: preserve
+    - name: create ssh public key
+      copy:
+        dest: /home/cbt/.ssh/id_rsa.pub
+        content: "{{ public_key }}"
+        owner: cbt
+        group: cbt
+        mode: '0644'
+    - name: create authorized_keys
+      copy:
+        dest: /home/cbt/.ssh/authorized_keys
+        content: "{{ public_key }}"
+        owner: cbt
+        group: cbt
+        mode: '0600'
+    - name: create ssh config
+      copy:
+        dest: /home/cbt/.ssh/config
+        content: "{{ ssh_config }}"
+        owner: cbt
+        group: cbt
+        mode: '0644'

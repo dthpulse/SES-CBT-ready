@@ -1,0 +1,37 @@
+- hosts: all
+  user: root
+  become: True
+  var_files:
+    - ../vars/global.yml
+    - ../vars/install_packages.yml
+  tasks:
+    - name: packages installation
+      zypper:
+        name: "{{ all_nodes_packages }}"
+        state: present
+        update_cache: True
+        type: package
+    - name: pattern installation
+      zypper:
+        name: "{{ all_nodes_patterns }}"
+        state: present
+        update_cache: True
+        type: pattern
+- hosts: "{{ master }}"
+  user: root
+  become: True
+  tasks:
+    - name: install packages for master
+      zypper:
+        name: "{{ master_packages }}"
+        state: present
+        update_cache: True
+- hosts: "{{ client }}"
+  user: root
+  become: True
+  tasks:
+    - name: ceph-common on client
+      zypper:
+        name: ceph-common
+        state: present
+        update_cache: True

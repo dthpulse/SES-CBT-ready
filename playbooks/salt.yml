@@ -1,0 +1,32 @@
+- hosts: all
+  user: root
+  become: True
+  vars_files:
+    - ../vars/global.yml
+  tasks:
+    - name: set up master on minions
+      copy:
+        content: 'master: "{{ master }}"'
+        dest: /etc/salt/minion.d/minions.conf
+        mode: 0644
+    - name: enable salt-minion service
+      service:
+        name: salt-minion
+        enabled: yes
+        state: started
+
+- hosts: "{{ master }}"
+  user: root
+  become: True
+  vars_files:
+    - ../vars/global.yml
+  tasks:
+    - name: enable and start salt-master
+      service:
+        name: salt-master
+        enabled: yes
+        state: started
+    - name: sleep
+      command: sleep 30
+    - name: accept keys
+      command: salt-key -Ay

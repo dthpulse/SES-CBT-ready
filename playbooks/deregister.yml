@@ -1,0 +1,6 @@
+- hosts: all
+  user: root
+  become: True
+  tasks:
+    - name: deregister from SCC
+      command: SUSEConnect -d -c

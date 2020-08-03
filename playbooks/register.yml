@@ -1,0 +1,6 @@
+- hosts: all
+  user: root
+  become: True
+  tasks:
+    - name: register to SCC
+      command: SUSEConnect -r "{{ scc_reg_key }}"
