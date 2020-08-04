@@ -6,6 +6,6 @@ for node in ares artemis hera demeter;do
     devices=(${devices[@]/$os_device})
     for i in ${devices[@]};do
         /usr/bin/dd if=/dev/zero of=/dev/$i bs=1M count=10 conv=fsync
-        /sbin/wipefs -a /dev/$i
+        /sbin/wipefs /dev/$i
     done
 done

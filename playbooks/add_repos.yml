@@ -4,7 +4,7 @@
   vars_files:
     - ../vars/add_repos.yml
   tasks:
-    - name: SUSE devel
+    - name: adding repositories
       zypper_repository:
         name: "{{ item.name }}"
         repo: "{{ item.url }}"

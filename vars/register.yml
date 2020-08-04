@@ -1,0 +1,5 @@
+scc_reg_key: 'deedc51104e549deb'
+modules:
+  - PackageHub/15.2/x86_64
+  - sle-module-desktop-applications/15.2/x86_64
+  - sle-module-development-tools/15.2/x86_64

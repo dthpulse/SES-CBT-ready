@@ -1,6 +1,10 @@
 - hosts: all
   user: root
   become: True
+  vars_files:
+    - ../vars/register.yml
   tasks:
     - name: register to SCC
       command: SUSEConnect -r "{{ scc_reg_key }}"
+    - name: register to "{{ modules }}"
+      command: SUSEConnect --product "{{ modules }}"

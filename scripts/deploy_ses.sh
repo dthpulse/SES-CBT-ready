@@ -1,6 +1,6 @@
 set -ex
 
-source .bashrc
+source /root/.bashrc
 
 monitors=($monitors)
 osd_nodes=($osd_nodes)
@@ -40,6 +40,25 @@ for node in ${osd_nodes[@]%%.*}
 do
     ceph orch host add $node
 done
+
+cat << EOF > /root/cluster.yaml
+service_type: mon
+placement:
+  host_pattern: '*'
+---
+service_type: mgr
+placement:
+  host_pattern: '*'
+---
+service_id: osds
+service_type: osd
+placement:
+  host_pattern: '*'
+data_devices:
+  rotational: 1
+db_devices:
+  model: 'INTEL SSDPED1K375GA'
+EOF
 
 ceph orch apply -i /root/cluster.yaml
 

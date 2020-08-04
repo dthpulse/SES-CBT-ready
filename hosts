@@ -1,24 +1,35 @@
 all:
   hosts:
-    master.sestest:
-    monitor[1:3].sestest:
-    osd-node[1:5].sestest:
+    apollo.qa.suse.cz:
+    ares.qa.suse.cz:
+    artemis.qa.suse.cz:
+    hera.qa.suse.cz:
+    demeter.qa.suse.cz:
     callisto.qa.suse.cz:
   children:
     sescluster:
       hosts:
-        master.sestest:
-        monitor[1:3].sestest:
-        osd-node[1:5].sestest:
+        apollo.qa.suse.cz:
+        ares.qa.suse.cz:
+        artemis.qa.suse.cz:
+        hera.qa.suse.cz:
+        demeter.qa.suse.cz:
     master:
       hosts:
-        master.sestest:
+        apollo.qa.suse.cz:
     client:
       hosts:
         callisto.qa.suse.cz:
     monitors:
       hosts:
-        monitor[1:3].sestest:
+        apollo.qa.suse.cz:
+        ares.qa.suse.cz:
+        artemis.qa.suse.cz:
+        hera.qa.suse.cz:
+        demeter.qa.suse.cz:
     osdnodes:
       hosts:
-        osd-node[1:5].sestest:
+        ares.qa.suse.cz:
+        artemis.qa.suse.cz:
+        hera.qa.suse.cz:
+        demeter.qa.suse.cz:

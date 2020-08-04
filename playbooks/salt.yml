@@ -1,8 +1,8 @@
-- hosts: all
+- hosts: sescluster
   user: root
   become: True
   vars_files:
-    - ../vars/global.yml
+    - ../vars/salt.yml
   tasks:
     - name: set up master on minions
       copy:
@@ -15,11 +15,9 @@
         enabled: yes
         state: started
 
-- hosts: "{{ master }}"
+- hosts: master
   user: root
   become: True
-  vars_files:
-    - ../vars/global.yml
   tasks:
     - name: enable and start salt-master
       service:

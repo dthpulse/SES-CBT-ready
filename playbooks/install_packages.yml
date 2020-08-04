@@ -1,8 +1,7 @@
 - hosts: all
   user: root
   become: True
-  var_files:
-    - ../vars/global.yml
+  vars_files:
     - ../vars/install_packages.yml
   tasks:
     - name: packages installation
@@ -17,11 +16,10 @@
         state: present
         update_cache: True
         type: pattern
-- hosts: "{{ master }}"
+- hosts: master
   user: root
   become: True
-  var_files:
-    - ../vars/global.yml
+  vars_files:
     - ../vars/install_packages.yml
   tasks:
     - name: install packages for master
@@ -29,11 +27,10 @@
         name: "{{ master_packages }}"
         state: present
         update_cache: True
-- hosts: "{{ client }}"
+- hosts: client
   user: root
   become: True
-  var_files:
-    - ../vars/global.yml
+  vars_files:
     - ../vars/install_packages.yml
   tasks:
     - name: ceph-common on client

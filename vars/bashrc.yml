@@ -1,3 +1,3 @@
-master_bashrc: master="master.sestest"
-monitors_bashrc: monitors="monitor1.sestest monitor2.sestest monitor3.sestest"
-osd_nodes_bashrc: osd_nodes="osd-node1 osd-node2 osd-node3 osd-node4 osd-node5"
+master_bashrc: master="apollo.qa.suse.cz"
+monitors_bashrc: monitors="apollo.qa.suse.cz ares.qa.suse.cz artemis.qa.suse.cz hera.qa.suse.cz demeter.qa.suse.cz"
+osd_nodes_bashrc: osd_nodes="ares.qa.suse.cz artemis.qa.suse.cz hera.qa.suse.cz demeter.qa.suse.cz"
