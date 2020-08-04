@@ -7,4 +7,5 @@
     - name: register to SCC
       command: SUSEConnect -r "{{ scc_reg_key }}"
     - name: register to "{{ modules }}"
-      command: SUSEConnect --product "{{ modules }}"
+      command: SUSEConnect --product "{{ item }}"
+      loop: "{{ modules }}"

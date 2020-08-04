@@ -1115,6 +1115,7 @@ EOF
       <package>btrfsprogs</package>
       <package>autoyast2</package>
       <package>python-xml</package>
+      <package>python</package>
     </packages>
     <patterns config:type="list">
       <pattern>base</pattern>
