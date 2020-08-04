@@ -6,3 +6,9 @@
       script: ../scripts/prepare_disks.sh
     - name: reboot with defaults
       reboot:
+
+- hosts: master
+  user: root
+  tasks:
+    - name: mount /dev/sdb1 on master
+      command: mount /dev/sdb1 /opt
