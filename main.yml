@@ -1,7 +1,10 @@
-- import_playbook: add_repos.yml
-- import_playbook: register.yml
-- import_playbook: install_packages.yml
-- import_playbook: cbt_user.yml
-- import_playbook: bashrc.yml
-- import_playbook: salt.yml
-- import_playbook: deregister.yml
+- import_playbook: playbooks/add_repos.yml
+- import_playbook: playbooks/register.yml
+- import_playbook: playbooks/install_packages.yml
+- import_playbook: playbooks/cbt_user.yml
+- import_playbook: playbooks/ssh_access.yml
+- import_playbook: playbooks/bashrc.yml
+- import_playbook: playbooks/salt.yml
+- import_playbook: playbooks/deregister.yml
+- import_playbook: playbooks/prepare_disks.yml
+- import_playbook: playbooks/deploy_ses.yml
