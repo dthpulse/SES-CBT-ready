@@ -1,8 +1,6 @@
 - hosts: all
   user: root
   become: True
-  vars_files:
-    - ../vars/cbt_user.yml
   tasks:
     - name: create cbt group
       group:
