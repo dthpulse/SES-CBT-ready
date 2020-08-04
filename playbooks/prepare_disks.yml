@@ -1,4 +1,4 @@
-- hosts: sescluster
+- hosts: osdnodes
   user: root
   become: True
   tasks:
