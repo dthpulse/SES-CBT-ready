@@ -1,0 +1,6 @@
+- hosts: master
+  user: root
+  become: True
+  tasks:
+    - name: deploy SES
+      script: ../scripts/deploy_ses.sh

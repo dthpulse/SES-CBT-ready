@@ -1,0 +1,8 @@
+- hosts: sescluster
+  user: root
+  become: True
+  tasks:
+    - name: prepare disks
+      script: ../scripts/prepare_disks.sh
+    - name: reboot with defaults
+      reboot:
