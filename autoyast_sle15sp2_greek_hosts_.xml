@@ -1,0 +1,1471 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <add-on>
+    <add_on_others config:type="list"/>
+    <add_on_products config:type="list">
+      <listentry>
+        <media_url><![CDATA[http://mirror.suse.cz/install/SLP/SLE-15-SP2-Full-GM/x86_64/DVD1]]></media_url>
+        <product>sle-module-basesystem</product>
+        <product_dir>/Module-Basesystem</product_dir>
+      </listentry>
+      <listentry>
+        <media_url><![CDATA[http://mirror.suse.cz/install/SLP/SLE-15-SP2-Full-GM/x86_64/DVD1]]></media_url>
+        <product>sle-module-server-applications</product>
+        <product_dir>/Module-Server-Applications</product_dir>
+      </listentry>
+      <listentry>
+        <media_url><![CDATA[http://mirror.suse.cz/install/SLP/SLE-15-SP2-Full-GM/x86_64/DVD1]]></media_url>
+        <product>sle-module-legacy</product>
+        <product_dir>/Module-Legacy</product_dir>
+      </listentry>
+      <listentry>
+        <media_url><![CDATA[http://mirror.suse.cz/install/SLP/SLE-15-SP2-Full-GM/x86_64/DVD1]]></media_url>
+        <product>sle-module-python2</product>
+        <product_dir>/Module-Python2</product_dir>
+      </listentry>
+    </add_on_products>
+  </add-on>
+  <auth-client>
+    <conf_json>{"sssd":{"conf":{"sssd":{"config_file_version":"2","services":[],"domains":[]}},"pam":false,"nss":[],"enabled":false},"ldap":{"conf":{},"pam":false,"nss":[]},"krb":{"conf":{"include":["includedir /etc/krb5.conf.d"],"libdefaults":{"dns_canonicalize_hostname":"false","rdns":"false"},"realms":{},"domain_realm":{},"logging":{"kdc":"FILE:/var/log/krb5/krb5kdc.log","admin_server":"FILE:/var/log/krb5/kadmind.log","default":"SYSLOG:NOTICE:DAEMON"}},"pam":false},"aux":{"autofs":false,"nscd":true,"mkhomedir":false},"ad":{"domain":"","user":"","ou":"","pass":"","overwrite_smb_conf":false,"update_dns":true}}</conf_json>
+  </auth-client>
+  <bootloader>
+    <global>
+      <append>resume=/dev/sda1 mitigations=auto quiet crashkernel=201M,high crashkernel=72M,low</append>
+      <cpu_mitigations>auto</cpu_mitigations>
+      <gfxmode>auto</gfxmode>
+      <hiddenmenu>false</hiddenmenu>
+      <os_prober>false</os_prober>
+      <secure_boot>true</secure_boot>
+      <terminal>gfxterm</terminal>
+      <timeout config:type="integer">8</timeout>
+      <trusted_grub>false</trusted_grub>
+      <xen_kernel_append>vga=gfx-1024x768x16 crashkernel=273M\&lt;4G</xen_kernel_append>
+    </global>
+    <loader_type>grub2</loader_type>
+  </bootloader>
+  <deploy_image>
+    <image_installation config:type="boolean">false</image_installation>
+  </deploy_image>
+  <firewall>
+    <default_zone>public</default_zone>
+    <enable_firewall config:type="boolean">false</enable_firewall>
+    <log_denied_packets>off</log_denied_packets>
+    <start_firewall config:type="boolean">false</start_firewall>
+    <zones config:type="list">
+      <zone>
+        <description>Unsolicited incoming network packets are rejected. Incoming packets that are related to outgoing network connections are accepted. Outgoing network connections are allowed.</description>
+        <interfaces config:type="list"/>
+        <masquerade config:type="boolean">false</masquerade>
+        <name>block</name>
+        <ports config:type="list"/>
+        <protocols config:type="list"/>
+        <services config:type="list"/>
+        <short>Block</short>
+        <target>%%REJECT%%</target>
+      </zone>
+      <zone>
+        <description>For computers in your demilitarized zone that are publicly-accessible with limited access to your internal network. Only selected incoming connections are accepted.</description>
+        <interfaces config:type="list"/>
+        <masquerade config:type="boolean">false</masquerade>
+        <name>dmz</name>
+        <ports config:type="list"/>
+        <protocols config:type="list"/>
+        <services config:type="list">
+          <service>ssh</service>
+        </services>
+        <short>DMZ</short>
+        <target>default</target>
+      </zone>
+      <zone>
+        <description>Unsolicited incoming network packets are dropped. Incoming packets that are related to outgoing network connections are accepted. Outgoing network connections are allowed.</description>
+        <interfaces config:type="list"/>
+        <masquerade config:type="boolean">false</masquerade>
+        <name>drop</name>
+        <ports config:type="list"/>
+        <protocols config:type="list"/>
+        <services config:type="list"/>
+        <short>Drop</short>
+        <target>DROP</target>
+      </zone>
+      <zone>
+        <description>For use on external networks. You do not trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</description>
+        <interfaces config:type="list"/>
+        <masquerade config:type="boolean">true</masquerade>
+        <name>external</name>
+        <ports config:type="list"/>
+        <protocols config:type="list"/>
+        <services config:type="list">
+          <service>ssh</service>
+        </services>
+        <short>External</short>
+        <target>default</target>
+      </zone>
+      <zone>
+        <description>For use in home areas. You mostly trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</description>
+        <interfaces config:type="list"/>
+        <masquerade config:type="boolean">false</masquerade>
+        <name>home</name>
+        <ports config:type="list"/>
+        <protocols config:type="list"/>
+        <services config:type="list">
+          <service>ssh</service>
+          <service>mdns</service>
+          <service>samba-client</service>
+          <service>dhcpv6-client</service>
+        </services>
+        <short>Home</short>
+        <target>default</target>
+      </zone>
+      <zone>
+        <description>For use on internal networks. You mostly trust the other computers on the networks to not harm your computer. Only selected incoming connections are accepted.</description>
+        <interfaces config:type="list"/>
+        <masquerade config:type="boolean">false</masquerade>
+        <name>internal</name>
+        <ports config:type="list"/>
+        <protocols config:type="list"/>
+        <services config:type="list">
+          <service>ssh</service>
+          <service>mdns</service>
+          <service>samba-client</service>
+          <service>dhcpv6-client</service>
+        </services>
+        <short>Internal</short>
+        <target>default</target>
+      </zone>
+      <zone>
+        <description>For use in public areas. You do not trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</description>
+        <interfaces config:type="list"/>
+        <masquerade config:type="boolean">false</masquerade>
+        <name>public</name>
+        <ports config:type="list"/>
+        <protocols config:type="list"/>
+        <services config:type="list">
+          <service>dhcpv6-client</service>
+        </services>
+        <short>Public</short>
+        <target>default</target>
+      </zone>
+      <zone>
+        <description>All network connections are accepted.</description>
+        <interfaces config:type="list"/>
+        <masquerade config:type="boolean">false</masquerade>
+        <name>trusted</name>
+        <ports config:type="list"/>
+        <protocols config:type="list"/>
+        <services config:type="list"/>
+        <short>Trusted</short>
+        <target>ACCEPT</target>
+      </zone>
+      <zone>
+        <description>For use in work areas. You mostly trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</description>
+        <interfaces config:type="list"/>
+        <masquerade config:type="boolean">false</masquerade>
+        <name>work</name>
+        <ports config:type="list"/>
+        <protocols config:type="list"/>
+        <services config:type="list">
+          <service>ssh</service>
+          <service>dhcpv6-client</service>
+        </services>
+        <short>Work</short>
+        <target>default</target>
+      </zone>
+    </zones>
+  </firewall>
+  <general>
+    <ask-list config:type="list"/>
+    <mode>
+      <confirm config:type="boolean">false</confirm>
+      <final_halt config:type="boolean">false</final_halt>
+      <final_reboot config:type="boolean">true</final_reboot>
+      <halt config:type="boolean">false</halt>
+      <second_stage config:type="boolean">true</second_stage>
+    </mode>
+    <proposals config:type="list"/>
+    <signature-handling>
+      <accept_file_without_checksum config:type="boolean">false</accept_file_without_checksum>
+      <accept_non_trusted_gpg_key config:type="boolean">false</accept_non_trusted_gpg_key>
+      <accept_unknown_gpg_key config:type="boolean">false</accept_unknown_gpg_key>
+      <accept_unsigned_file config:type="boolean">false</accept_unsigned_file>
+      <accept_verification_failed config:type="boolean">false</accept_verification_failed>
+      <import_gpg_key config:type="boolean">false</import_gpg_key>
+    </signature-handling>
+    <storage/>
+  </general>
+  <groups config:type="list">
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>100</gid>
+      <group_password>x</group_password>
+      <groupname>users</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>65534</gid>
+      <group_password>x</group_password>
+      <groupname>nobody</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>0</gid>
+      <group_password>x</group_password>
+      <groupname>root</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>497</gid>
+      <group_password>x</group_password>
+      <groupname>wheel</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>488</gid>
+      <group_password>x</group_password>
+      <groupname>kvm</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>479</gid>
+      <group_password>x</group_password>
+      <groupname>sshd</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>62</gid>
+      <group_password>x</group_password>
+      <groupname>man</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>483</gid>
+      <group_password>x</group_password>
+      <groupname>systemd-coredump</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>71</gid>
+      <group_password>x</group_password>
+      <groupname>ntadmin</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>1</gid>
+      <group_password>x</group_password>
+      <groupname>bin</groupname>
+      <userlist>daemon</userlist>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>495</gid>
+      <group_password>x</group_password>
+      <groupname>lock</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>42</gid>
+      <group_password>x</group_password>
+      <groupname>trusted</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>486</gid>
+      <group_password>x</group_password>
+      <groupname>tape</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>484</gid>
+      <group_password>x</group_password>
+      <groupname>systemd-journal</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>492</gid>
+      <group_password>x</group_password>
+      <groupname>cdrom</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>494</gid>
+      <group_password>x</group_password>
+      <groupname>utmp</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>5</gid>
+      <group_password>x</group_password>
+      <groupname>tty</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>496</gid>
+      <group_password>x</group_password>
+      <groupname>kmem</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>491</gid>
+      <group_password>x</group_password>
+      <groupname>dialout</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>493</gid>
+      <group_password>x</group_password>
+      <groupname>audio</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>498</gid>
+      <group_password>!</group_password>
+      <groupname>mail</groupname>
+      <userlist>postfix</userlist>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>65533</gid>
+      <group_password>x</group_password>
+      <groupname>nogroup</groupname>
+      <userlist>nobody</userlist>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>487</gid>
+      <group_password>x</group_password>
+      <groupname>lp</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>2</gid>
+      <group_password>x</group_password>
+      <groupname>daemon</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>478</gid>
+      <group_password>x</group_password>
+      <groupname>chrony</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>481</gid>
+      <group_password>x</group_password>
+      <groupname>polkitd</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>59</gid>
+      <group_password>x</group_password>
+      <groupname>maildrop</groupname>
+      <userlist>postfix</userlist>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>485</gid>
+      <group_password>x</group_password>
+      <groupname>video</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>490</gid>
+      <group_password>x</group_password>
+      <groupname>disk</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>489</gid>
+      <group_password>x</group_password>
+      <groupname>input</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>15</gid>
+      <group_password>x</group_password>
+      <groupname>shadow</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>480</gid>
+      <group_password>x</group_password>
+      <groupname>nscd</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>499</gid>
+      <group_password>x</group_password>
+      <groupname>messagebus</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>51</gid>
+      <group_password>x</group_password>
+      <groupname>postfix</groupname>
+      <userlist/>
+    </group>
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>482</gid>
+      <group_password>x</group_password>
+      <groupname>systemd-timesync</groupname>
+      <userlist/>
+    </group>
+  </groups>
+  <host>
+    <hosts config:type="list">
+      <hosts_entry>
+        <host_address>127.0.0.1</host_address>
+        <names config:type="list">
+          <name>localhost</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry>
+        <host_address>::1</host_address>
+        <names config:type="list">
+          <name>localhost ipv6-localhost ipv6-loopback</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry>
+        <host_address>fe00::0</host_address>
+        <names config:type="list">
+          <name>ipv6-localnet</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry>
+        <host_address>ff00::0</host_address>
+        <names config:type="list">
+          <name>ipv6-mcastprefix</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry>
+        <host_address>ff02::1</host_address>
+        <names config:type="list">
+          <name>ipv6-allnodes</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry>
+        <host_address>ff02::2</host_address>
+        <names config:type="list">
+          <name>ipv6-allrouters</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry>
+        <host_address>ff02::3</host_address>
+        <names config:type="list">
+          <name>ipv6-allhosts</name>
+        </names>
+      </hosts_entry>
+    </hosts>
+  </host>
+  <kdump>
+    <add_crash_kernel config:type="boolean">true</add_crash_kernel>
+    <crash_kernel config:type="list">
+      <listentry>201M,high</listentry>
+      <listentry>72M,low</listentry>
+    </crash_kernel>
+    <crash_xen_kernel>273M\&lt;4G</crash_xen_kernel>
+    <general>
+      <KDUMPTOOL_FLAGS/>
+      <KDUMP_COMMANDLINE/>
+      <KDUMP_COMMANDLINE_APPEND/>
+      <KDUMP_CONTINUE_ON_ERROR>true</KDUMP_CONTINUE_ON_ERROR>
+      <KDUMP_COPY_KERNEL>yes</KDUMP_COPY_KERNEL>
+      <KDUMP_CPUS/>
+      <KDUMP_DUMPFORMAT>lzo</KDUMP_DUMPFORMAT>
+      <KDUMP_DUMPLEVEL>31</KDUMP_DUMPLEVEL>
+      <KDUMP_FREE_DISK_SIZE>64</KDUMP_FREE_DISK_SIZE>
+      <KDUMP_HOST_KEY/>
+      <KDUMP_IMMEDIATE_REBOOT>yes</KDUMP_IMMEDIATE_REBOOT>
+      <KDUMP_KEEP_OLD_DUMPS>5</KDUMP_KEEP_OLD_DUMPS>
+      <KDUMP_KERNELVER/>
+      <KDUMP_NETCONFIG>auto</KDUMP_NETCONFIG>
+      <KDUMP_NET_TIMEOUT>30</KDUMP_NET_TIMEOUT>
+      <KDUMP_NOTIFICATION_CC/>
+      <KDUMP_NOTIFICATION_TO/>
+      <KDUMP_POSTSCRIPT/>
+      <KDUMP_PRESCRIPT/>
+      <KDUMP_REQUIRED_PROGRAMS/>
+      <KDUMP_SAVEDIR>/var/crash</KDUMP_SAVEDIR>
+      <KDUMP_SMTP_PASSWORD/>
+      <KDUMP_SMTP_SERVER/>
+      <KDUMP_SMTP_USER/>
+      <KDUMP_TRANSFER/>
+      <KDUMP_VERBOSE>3</KDUMP_VERBOSE>
+      <KEXEC_OPTIONS/>
+    </general>
+  </kdump>
+  <keyboard>
+    <keymap>english-us</keymap>
+  </keyboard>
+  <login_settings/>
+  <networking>
+    <dns>
+      <dhcp_hostname config:type="boolean">true</dhcp_hostname>
+      <hostname></hostname>
+      <resolv_conf_policy>auto</resolv_conf_policy>
+    </dns>
+    <interfaces config:type="list">
+      <interface>
+        <aliases/>
+        <bootproto>dhcp</bootproto>
+        <name>eth0</name>
+        <startmode>auto</startmode>
+      </interface>
+    </interfaces>
+    <ipv6 config:type="boolean">true</ipv6>
+    <keep_install_network config:type="boolean">true</keep_install_network>
+    <managed config:type="boolean">false</managed>
+    <net-udev config:type="list">
+      <rule>
+        <name>eth0</name>
+        <rule>ATTR{address}</rule>
+        <value>0c:c4:7a:7c:e2:78</value>
+      </rule>
+      <rule>
+        <name>eth2</name>
+        <rule>ATTR{address}</rule>
+        <value>a0:36:9f:27:ec:00</value>
+      </rule>
+      <rule>
+        <name>eth3</name>
+        <rule>ATTR{address}</rule>
+        <value>a0:36:9f:27:ec:02</value>
+      </rule>
+      <rule>
+        <name>eth1</name>
+        <rule>ATTR{address}</rule>
+        <value>0c:c4:7a:7c:e2:79</value>
+      </rule>
+    </net-udev>
+    <routing>
+      <ipv4_forward config:type="boolean">false</ipv4_forward>
+      <ipv6_forward config:type="boolean">false</ipv6_forward>
+    </routing>
+  </networking>
+  <nfs>
+    <enable_nfs4 config:type="boolean">true</enable_nfs4>
+    <enable_nfs_gss config:type="boolean">false</enable_nfs_gss>
+    <idmapd_domain>localdomain</idmapd_domain>
+    <nfs_entries config:type="list"/>
+  </nfs>
+  <ntp-client>
+    <ntp_policy>auto</ntp_policy>
+    <ntp_servers config:type="list"/>
+    <ntp_sync>manual</ntp_sync>
+  </ntp-client>
+  <partitioning config:type="list">
+    <!--drive>
+      <device>/dev/ceph-block-0f1237af-a9db-4b14-97a1-32a27c5c080a</device>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <lv_name>osd-block-c98bce46-f204-487d-be6d-3da386801634</lv_name>
+          <pool config:type="boolean">false</pool>
+          <resize config:type="boolean">false</resize>
+          <size>2000381018112</size>
+          <stripes config:type="integer">1</stripes>
+          <stripesize config:type="integer">0</stripesize>
+        </partition>
+      </partitions>
+      <pesize>1073741824</pesize>
+      <type config:type="symbol">CT_LVM</type>
+    </drive>
+    <drive>
+      <device>/dev/ceph-block-23040a37-2c75-42df-844c-7a49e484468a</device>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <lv_name>osd-block-5b12971c-21e4-4f4a-ba26-575d1242940b</lv_name>
+          <pool config:type="boolean">false</pool>
+          <resize config:type="boolean">false</resize>
+          <size>2000381018112</size>
+          <stripes config:type="integer">1</stripes>
+          <stripesize config:type="integer">0</stripesize>
+        </partition>
+      </partitions>
+      <pesize>1073741824</pesize>
+      <type config:type="symbol">CT_LVM</type>
+    </drive>
+    <drive>
+      <device>/dev/ceph-block-5864ca76-a25c-474c-b39e-ac81752b5fdd</device>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <lv_name>osd-block-114a40f9-dbc8-4a66-a597-d2b9901186a4</lv_name>
+          <pool config:type="boolean">false</pool>
+          <resize config:type="boolean">false</resize>
+          <size>2000381018112</size>
+          <stripes config:type="integer">1</stripes>
+          <stripesize config:type="integer">0</stripesize>
+        </partition>
+      </partitions>
+      <pesize>1073741824</pesize>
+      <type config:type="symbol">CT_LVM</type>
+    </drive>
+    <drive>
+      <device>/dev/ceph-block-b330c5f0-6992-4796-a3fa-0c8ff86e6695</device>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <lv_name>osd-block-d4df0331-0e57-4f34-8f2b-c7a573bc92cc</lv_name>
+          <pool config:type="boolean">false</pool>
+          <resize config:type="boolean">false</resize>
+          <size>2000381018112</size>
+          <stripes config:type="integer">1</stripes>
+          <stripesize config:type="integer">0</stripesize>
+        </partition>
+      </partitions>
+      <pesize>1073741824</pesize>
+      <type config:type="symbol">CT_LVM</type>
+    </drive>
+    <drive>
+      <device>/dev/ceph-block-d7b88b81-75f5-48eb-856a-1642dcb86f30</device>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <lv_name>osd-block-28ec7b07-1f1f-4bac-b0e6-127fa6904e1e</lv_name>
+          <pool config:type="boolean">false</pool>
+          <resize config:type="boolean">false</resize>
+          <size>2000381018112</size>
+          <stripes config:type="integer">1</stripes>
+          <stripesize config:type="integer">0</stripesize>
+        </partition>
+      </partitions>
+      <pesize>1073741824</pesize>
+      <type config:type="symbol">CT_LVM</type>
+    </drive>
+    <drive>
+      <device>/dev/ceph-block-dbs-3e879ff4-9595-4498-8fbc-485ca8c89dd1</device>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <lv_name>osd-block-db-91c53e50-b5b7-496c-b79f-0f9b9399be99</lv_name>
+          <pool config:type="boolean">false</pool>
+          <resize config:type="boolean">false</resize>
+          <size>74088185856</size>
+          <stripes config:type="integer">1</stripes>
+          <stripesize config:type="integer">0</stripesize>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <lv_name>osd-block-db-182b183d-07f0-489c-b47a-8dddc22a1a6f</lv_name>
+          <pool config:type="boolean">false</pool>
+          <resize config:type="boolean">false</resize>
+          <size>74088185856</size>
+          <stripes config:type="integer">1</stripes>
+          <stripesize config:type="integer">0</stripesize>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <lv_name>osd-block-db-572e627e-f21d-492d-a938-4a25c33360a8</lv_name>
+          <pool config:type="boolean">false</pool>
+          <resize config:type="boolean">false</resize>
+          <size>74088185856</size>
+          <stripes config:type="integer">1</stripes>
+          <stripesize config:type="integer">0</stripesize>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <lv_name>osd-block-db-4256c827-49d9-4ab5-94fb-efa3396ff0b3</lv_name>
+          <pool config:type="boolean">false</pool>
+          <resize config:type="boolean">false</resize>
+          <size>74088185856</size>
+          <stripes config:type="integer">1</stripes>
+          <stripesize config:type="integer">0</stripesize>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <lv_name>osd-block-db-c7f6c7f4-1300-44bc-89b6-9fedc41b8fef</lv_name>
+          <pool config:type="boolean">false</pool>
+          <resize config:type="boolean">false</resize>
+          <size>74088185856</size>
+          <stripes config:type="integer">1</stripes>
+          <stripesize config:type="integer">0</stripesize>
+        </partition>
+      </partitions>
+      <pesize>1073741824</pesize>
+      <type config:type="symbol">CT_LVM</type>
+    </drive>
+    <drive>
+      <device>/dev/ceph-c3d6faa3-7994-45dd-8d0e-516d520b31c0</device>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <lv_name>osd-data-df53e3d0-c912-4ad2-ae20-1e33e805d57c</lv_name>
+          <pool config:type="boolean">false</pool>
+          <resize config:type="boolean">false</resize>
+          <size>239444426752</size>
+          <stripes config:type="integer">1</stripes>
+          <stripesize config:type="integer">0</stripesize>
+        </partition>
+      </partitions>
+      <pesize>1073741824</pesize>
+      <type config:type="symbol">CT_LVM</type>
+    </drive>
+    <drive>
+      <device>/dev/ceph-f7b766fe-118d-4134-8af2-39fddeabdc95</device>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <lv_name>osd-data-1173419e-8467-444c-b7b6-98993c43beb5</lv_name>
+          <pool config:type="boolean">false</pool>
+          <resize config:type="boolean">false</resize>
+          <size>239444426752</size>
+          <stripes config:type="integer">1</stripes>
+          <stripesize config:type="integer">0</stripesize>
+        </partition>
+      </partitions>
+      <pesize>1073741824</pesize>
+      <type config:type="symbol">CT_LVM</type>
+    </drive>
+    <drive>
+      <device>/dev/nvme0n1</device>
+      <disklabel>none</disklabel>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">false</create>
+          <format config:type="boolean">false</format>
+          <lvm_group>ceph-block-dbs-3e879ff4-9595-4498-8fbc-485ca8c89dd1</lvm_group>
+          <resize config:type="boolean">false</resize>
+        </partition>
+      </partitions>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive-->
+    <drive>
+      <device>/dev/sda</device>
+      <disklabel>gpt</disklabel>
+      <enable_snapshots config:type="boolean">true</enable_snapshots>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <filesystem config:type="symbol">swap</filesystem>
+          <format config:type="boolean">true</format>
+          <mount>swap</mount>
+          <mountby config:type="symbol">uuid</mountby>
+          <partition_id config:type="integer">130</partition_id>
+          <partition_nr config:type="integer">1</partition_nr>
+          <resize config:type="boolean">false</resize>
+          <size>10737418240</size>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">false</format>
+          <partition_id config:type="integer">263</partition_id>
+          <partition_nr config:type="integer">2</partition_nr>
+          <resize config:type="boolean">false</resize>
+          <size>524288000</size>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <create_subvolumes config:type="boolean">true</create_subvolumes>
+          <filesystem config:type="symbol">btrfs</filesystem>
+          <format config:type="boolean">true</format>
+          <mount>/</mount>
+          <mountby config:type="symbol">uuid</mountby>
+          <partition_id config:type="integer">131</partition_id>
+          <partition_nr config:type="integer">3</partition_nr>
+          <resize config:type="boolean">false</resize>
+          <size>228791943168</size>
+          <subvolumes config:type="list">
+            <subvolume>
+              <copy_on_write config:type="boolean">true</copy_on_write>
+              <path>tmp</path>
+            </subvolume>
+            <subvolume>
+              <copy_on_write config:type="boolean">true</copy_on_write>
+              <path>usr/local</path>
+            </subvolume>
+            <subvolume>
+              <copy_on_write config:type="boolean">true</copy_on_write>
+              <path>home</path>
+            </subvolume>
+            <subvolume>
+              <copy_on_write config:type="boolean">true</copy_on_write>
+              <path>boot/grub2/i386-pc</path>
+            </subvolume>
+            <subvolume>
+              <copy_on_write config:type="boolean">false</copy_on_write>
+              <path>var</path>
+            </subvolume>
+            <subvolume>
+              <copy_on_write config:type="boolean">true</copy_on_write>
+              <path>opt</path>
+            </subvolume>
+            <subvolume>
+              <copy_on_write config:type="boolean">true</copy_on_write>
+              <path>root</path>
+            </subvolume>
+            <subvolume>
+              <copy_on_write config:type="boolean">true</copy_on_write>
+              <path>boot/grub2/x86_64-efi</path>
+            </subvolume>
+            <subvolume>
+              <copy_on_write config:type="boolean">true</copy_on_write>
+              <path>srv</path>
+            </subvolume>
+          </subvolumes>
+          <subvolumes_prefix><![CDATA[@]]></subvolumes_prefix>
+        </partition>
+      </partitions>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+    <!--drive>
+      <device>/dev/sdb</device>
+      <disklabel>none</disklabel>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">false</create>
+          <format config:type="boolean">false</format>
+          <lvm_group>ceph-block-5864ca76-a25c-474c-b39e-ac81752b5fdd</lvm_group>
+          <resize config:type="boolean">false</resize>
+        </partition>
+      </partitions>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+    <drive>
+      <device>/dev/sdc</device>
+      <disklabel>none</disklabel>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">false</create>
+          <format config:type="boolean">false</format>
+          <lvm_group>ceph-block-b330c5f0-6992-4796-a3fa-0c8ff86e6695</lvm_group>
+          <resize config:type="boolean">false</resize>
+        </partition>
+      </partitions>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+    <drive>
+      <device>/dev/sdd</device>
+      <disklabel>none</disklabel>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">false</create>
+          <format config:type="boolean">false</format>
+          <lvm_group>ceph-block-d7b88b81-75f5-48eb-856a-1642dcb86f30</lvm_group>
+          <resize config:type="boolean">false</resize>
+        </partition>
+      </partitions>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+    <drive>
+      <device>/dev/sde</device>
+      <disklabel>none</disklabel>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">false</create>
+          <format config:type="boolean">false</format>
+          <lvm_group>ceph-block-23040a37-2c75-42df-844c-7a49e484468a</lvm_group>
+          <resize config:type="boolean">false</resize>
+        </partition>
+      </partitions>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+    <drive>
+      <device>/dev/sdf</device>
+      <disklabel>none</disklabel>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">false</create>
+          <format config:type="boolean">false</format>
+          <lvm_group>ceph-block-0f1237af-a9db-4b14-97a1-32a27c5c080a</lvm_group>
+          <resize config:type="boolean">false</resize>
+        </partition>
+      </partitions>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+    <drive>
+      <device>/dev/sdg</device>
+      <disklabel>none</disklabel>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">false</create>
+          <format config:type="boolean">false</format>
+          <lvm_group>ceph-c3d6faa3-7994-45dd-8d0e-516d520b31c0</lvm_group>
+          <resize config:type="boolean">false</resize>
+        </partition>
+      </partitions>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+    <drive>
+      <device>/dev/sdh</device>
+      <disklabel>none</disklabel>
+      <initialize config:type="boolean">false</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">false</create>
+          <format config:type="boolean">false</format>
+          <lvm_group>ceph-f7b766fe-118d-4134-8af2-39fddeabdc95</lvm_group>
+          <resize config:type="boolean">false</resize>
+        </partition>
+      </partitions>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive-->
+  </partitioning>
+  <proxy>
+    <enabled config:type="boolean">false</enabled>
+    <ftp_proxy/>
+    <http_proxy/>
+    <https_proxy/>
+    <no_proxy>localhost,127.0.0.1</no_proxy>
+    <proxy_password/>
+    <proxy_user/>
+  </proxy>
+  <security>
+    <console_shutdown>reboot</console_shutdown>
+    <cracklib_dict_path>/usr/lib/cracklib_dict</cracklib_dict_path>
+    <disable_restart_on_update>no</disable_restart_on_update>
+    <disable_stop_on_removal>no</disable_stop_on_removal>
+    <extra_services>insecure</extra_services>
+    <fail_delay>3</fail_delay>
+    <gid_max>60000</gid_max>
+    <gid_min>1000</gid_min>
+    <hibernate_system>active_console</hibernate_system>
+    <kernel.sysrq>184</kernel.sysrq>
+    <mandatory_services>insecure</mandatory_services>
+    <net.ipv4.ip_forward>0</net.ipv4.ip_forward>
+    <net.ipv4.tcp_syncookies>0</net.ipv4.tcp_syncookies>
+    <net.ipv6.conf.all.forwarding>0</net.ipv6.conf.all.forwarding>
+    <pass_max_days>99999</pass_max_days>
+    <pass_min_days>0</pass_min_days>
+    <pass_min_len>5</pass_min_len>
+    <pass_warn_age>7</pass_warn_age>
+    <passwd_encryption>sha512</passwd_encryption>
+    <passwd_remember_history>0</passwd_remember_history>
+    <passwd_use_cracklib>yes</passwd_use_cracklib>
+    <permission_security>easy</permission_security>
+    <run_updatedb_as/>
+    <smtpd_listen_remote>no</smtpd_listen_remote>
+    <sys_gid_max>499</sys_gid_max>
+    <sys_gid_min>100</sys_gid_min>
+    <sys_uid_max>499</sys_uid_max>
+    <sys_uid_min>100</sys_uid_min>
+    <syslog_on_no_error>no</syslog_on_no_error>
+    <uid_max>60000</uid_max>
+    <uid_min>1000</uid_min>
+    <useradd_cmd>/usr/sbin/useradd.local</useradd_cmd>
+    <userdel_postcmd>/usr/sbin/userdel-post.local</userdel_postcmd>
+    <userdel_precmd>/usr/sbin/userdel-pre.local</userdel_precmd>
+  </security>
+  <scripts>
+    <init-scripts config:type="list">
+      <script>
+        <debug config:type="boolean">true</debug>
+        <filename>interface.sh</filename>
+        <location><![CDATA[]]></location>
+        <source><![CDATA[if [ "$HOSTNAME" == "apollo" ];then
+    nic="eth3"
+    octet="10"
+elif [ "$HOSTNAME" == "ares" ];then
+    nic="eth2"
+    octet="20"
+elif [ "$HOSTNAME" == "artemis" ];then
+    nic="eth2"
+    octet="30"
+elif [ "$HOSTNAME" == "hera" ];then
+    nic="eth2"
+    octet="40"
+elif [ "$HOSTNAME" == "demeter" ];then
+    nic="eth2"
+    octet="50"
+elif [ "$HOSTNAME" == "callisto" ];then
+    nic="eth2"
+    octet="60"
+elif [ "$HOSTNAME" == "maia" ];then
+    nic="eth2"
+    octet="70"
+elif [ "$HOSTNAME" == "poseidon" ];then
+    nic="eth3"
+    octet="80"
+fi
+
+cat << EOF > /etc/sysconfig/network/ifcfg-${nic}
+BOOTPROTO='static'
+STARTMODE='auto'
+IPADDR='192.168.88.${octet}/24'
+MTU='9000'
+EOF
+]]></source>
+      </script>
+    </init-scripts>
+  </scripts>
+  <services-manager>
+    <default_target>multi-user</default_target>
+    <services>
+      <disable config:type="list"/>
+      <enable config:type="list">
+        <service>YaST2-Firstboot</service>
+        <service>YaST2-Second-Stage</service>
+        <service>auditd</service>
+        <service>klog</service>
+        <service>btrfsmaintenance-refresh</service>
+        <service>cron</service>
+        <service>wickedd-auto4</service>
+        <service>wickedd-dhcp4</service>
+        <service>wickedd-dhcp6</service>
+        <service>wickedd-nanny</service>
+        <service>getty@tty1</service>
+        <service>haveged</service>
+        <service>irqbalance</service>
+        <service>iscsi</service>
+        <service>issue-generator</service>
+        <service>kbdsettings</service>
+        <service>kdump</service>
+        <service>kdump-early</service>
+        <service>lvm2-monitor</service>
+        <service>wicked</service>
+        <service>nscd</service>
+        <service>postfix</service>
+        <service>purge-kernels</service>
+        <service>rollback</service>
+        <service>rsyslog</service>
+        <service>smartd</service>
+        <service>sshd</service>
+      </enable>
+      <on_demand config:type="list">
+        <listentry>iscsid</listentry>
+      </on_demand>
+    </services>
+  </services-manager>
+  <software>
+    <image/>
+    <install_recommended config:type="boolean">true</install_recommended>
+    <instsource/>
+    <packages config:type="list">
+      <package>wicked</package>
+      <package>snapper</package>
+      <package>sles-release</package>
+      <package>sle-module-server-applications-release</package>
+      <package>sle-module-basesystem-release</package>
+      <package>openssh</package>
+      <package>numactl</package>
+      <package>lvm2</package>
+      <package>kexec-tools</package>
+      <package>kdump</package>
+      <package>irqbalance</package>
+      <package>grub2</package>
+      <package>glibc</package>
+      <package>e2fsprogs</package>
+      <package>btrfsprogs</package>
+      <package>autoyast2</package>
+      <package>python-xml</package>
+    </packages>
+    <patterns config:type="list">
+      <pattern>base</pattern>
+      <pattern>enhanced_base</pattern>
+      <pattern>minimal_base</pattern>
+      <pattern>x11_yast</pattern>
+      <pattern>yast2_basis</pattern>
+    </patterns>
+    <products config:type="list">
+      <product>SLES</product>
+    </products>
+  </software>
+  <timezone>
+    <hwclock>UTC</hwclock>
+    <timezone>Europe/Prague</timezone>
+  </timezone>
+  <user_defaults>
+    <expire/>
+    <group>100</group>
+    <groups/>
+    <home>/home</home>
+    <inactive>-1</inactive>
+    <no_groups config:type="boolean">true</no_groups>
+    <shell>/bin/bash</shell>
+    <skel>/etc/skel</skel>
+    <umask>022</umask>
+  </user_defaults>
+  <users config:type="list">
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>bin</fullname>
+      <gid>1</gid>
+      <home>/bin</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>1</uid>
+      <user_password>!</user_password>
+      <username>bin</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>user for rpcbind</fullname>
+      <gid>65534</gid>
+      <home>/var/lib/empty</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>480</uid>
+      <user_password>!</user_password>
+      <username>rpc</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>Manual pages viewer</fullname>
+      <gid>62</gid>
+      <home>/var/lib/empty</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>13</uid>
+      <user_password>!</user_password>
+      <username>man</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>systemd Core Dumper</fullname>
+      <gid>483</gid>
+      <home>/</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>483</uid>
+      <user_password>!!</user_password>
+      <username>systemd-coredump</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>systemd Time Synchronization</fullname>
+      <gid>482</gid>
+      <home>/</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>482</uid>
+      <user_password>!!</user_password>
+      <username>systemd-timesync</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>Postfix Daemon</fullname>
+      <gid>51</gid>
+      <home>/var/spool/postfix</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/bin/false</shell>
+      <uid>51</uid>
+      <user_password>!</user_password>
+      <username>postfix</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>NFS statd daemon</fullname>
+      <gid>65533</gid>
+      <home>/var/lib/nfs</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>478</uid>
+      <user_password>!</user_password>
+      <username>statd</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>User for nscd</fullname>
+      <gid>480</gid>
+      <home>/run/nscd</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>479</uid>
+      <user_password>!</user_password>
+      <username>nscd</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>User for D-Bus</fullname>
+      <gid>499</gid>
+      <home>/run/dbus</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/bin/false</shell>
+      <uid>499</uid>
+      <user_password>!</user_password>
+      <username>messagebus</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>SSH daemon</fullname>
+      <gid>479</gid>
+      <home>/var/lib/sshd</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/bin/false</shell>
+      <uid>477</uid>
+      <user_password>!</user_password>
+      <username>sshd</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>Mailer daemon</fullname>
+      <gid>498</gid>
+      <home>/var/spool/clientmqueue</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>498</uid>
+      <user_password>!</user_password>
+      <username>mail</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>nobody</fullname>
+      <gid>65534</gid>
+      <home>/var/lib/nobody</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/bin/bash</shell>
+      <uid>65534</uid>
+      <user_password>!</user_password>
+      <username>nobody</username>
+    </user>
+    <user>
+      <authorized_keys config:type="list"/>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>root</fullname>
+      <gid>0</gid>
+      <home>/root</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/bin/bash</shell>
+      <uid>0</uid>
+      <user_password>$6$GkzpMNlmW5Dd$aVUbEvjUUjuix.WgY8PPJi8aYWtpzkY8mO5/RVWndLdOfx1qlrpDFROEIqE4azky4SJkshwwQly2YfVjeRhvW/</user_password>
+      <username>root</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>User for polkitd</fullname>
+      <gid>481</gid>
+      <home>/var/lib/polkit</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>481</uid>
+      <user_password>!</user_password>
+      <username>polkitd</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>Printing daemon</fullname>
+      <gid>487</gid>
+      <home>/var/spool/lpd</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>497</uid>
+      <user_password>!</user_password>
+      <username>lp</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>Daemon</fullname>
+      <gid>2</gid>
+      <home>/sbin</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>2</uid>
+      <user_password>!</user_password>
+      <username>daemon</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>Chrony Daemon</fullname>
+      <gid>478</gid>
+      <home>/var/lib/chrony</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/bin/false</shell>
+      <uid>476</uid>
+      <user_password>!</user_password>
+      <username>chrony</username>
+    </user>
+  </users>
+</profile>

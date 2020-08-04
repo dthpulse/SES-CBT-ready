@@ -77,4 +77,12 @@ do
 
 done
 
-ceph -s
+ceph config set global mon_allow_pool_delete true
+
+ceph config set global mon_clock_drift_allowed 2.0
+
+ceph config set mon public_network 10.100.96.0/19
+
+ceph config set global cluster_network 192.168.88.10/24
+
+ceph config set global osd_pool_default_pg_autoscale_mode off
