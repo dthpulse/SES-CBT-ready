@@ -28,6 +28,7 @@
       when: item != ansible_fqdn
       with_items:
         - "{{ groups['all'] }}"
+
     - name: create ssh config
       copy:
         dest: /home/cbt/.ssh/config

@@ -26,7 +26,7 @@
 - run playbooks:
 
   ```
-  ANSIBLE_CONFIG=ansible.cfg ansible-playbook main.yml
+  ANSIBLE_CONFIG=config/ansible.cfg ansible-playbook main.yml
   ```
 
 

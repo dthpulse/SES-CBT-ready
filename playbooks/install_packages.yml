@@ -10,12 +10,14 @@
         state: present
         update_cache: True
         type: package
+
     - name: pattern installation
       zypper:
         name: "{{ all_nodes_patterns }}"
         state: present
         update_cache: True
         type: pattern
+
     - name: update all packages
       zypper:
         name: '*'

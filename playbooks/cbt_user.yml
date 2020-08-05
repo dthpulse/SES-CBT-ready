@@ -6,6 +6,7 @@
       group:
         name: cbt
         state: present
+
     - name: create cbt user
       user: 
         name: cbt
@@ -13,6 +14,7 @@
         password: cbt
         shell: /bin/bash
         state: present
+
     - name: sudo without password for cbt user
       copy:
         content: 'cbt ALL=(ALL) NOPASSWD:ALL'

@@ -8,6 +8,7 @@
         dest: /etc/salt/minion.d/minions.conf
         mode: 0644
       with_items: "{{ groups['master'] }}"
+
     - name: enable and start salt-minion service
       service:
         name: salt-minion
@@ -23,7 +24,9 @@
         name: salt-master
         enabled: yes
         state: started
+
     - name: sleep
       command: sleep 30
+
     - name: accept keys
       command: salt-key -Ay
