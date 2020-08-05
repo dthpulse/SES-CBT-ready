@@ -1,14 +1,13 @@
 - hosts: sescluster
   user: root
   become: True
-  vars_files:
-    - ../vars/salt.yml
   tasks:
     - name: set up master on minions
       copy:
-        content: 'master: "{{ master }}"'
+        content: "master: {{item}}"
         dest: /etc/salt/minion.d/minions.conf
         mode: 0644
+      with_items: "{{ groups['master'] }}"
     - name: enable salt-minion service
       service:
         name: salt-minion
