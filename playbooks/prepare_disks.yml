@@ -4,7 +4,12 @@
   tasks:
     - name: prepare disks
       script: ../scripts/prepare_disks.sh
-    - name: reboot with defaults
+
+- hosts: all
+  user: root
+  become: True
+  tasks:
+    - name: reboot client
       reboot:
 
 - hosts: master
