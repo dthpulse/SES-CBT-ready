@@ -9,7 +9,7 @@
   user: root
   become: True
   tasks:
-    - name: reboot client
+    - name: reboot servers
       reboot:
 
 - hosts: master

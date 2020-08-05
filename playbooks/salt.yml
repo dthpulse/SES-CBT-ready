@@ -8,7 +8,7 @@
         dest: /etc/salt/minion.d/minions.conf
         mode: 0644
       with_items: "{{ groups['master'] }}"
-    - name: enable salt-minion service
+    - name: enable and start salt-minion service
       service:
         name: salt-minion
         enabled: yes
@@ -18,7 +18,7 @@
   user: root
   become: True
   tasks:
-    - name: enable and start salt-master
+    - name: enable and start salt-master service
       service:
         name: salt-master
         enabled: yes
