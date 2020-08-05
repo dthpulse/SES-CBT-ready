@@ -1,5 +1,5 @@
 - name: Exchange Keys between servers
-  hosts: sescluster
+  hosts: all
   become: True
   vars_files:
     - ../vars/ssh_access.yml

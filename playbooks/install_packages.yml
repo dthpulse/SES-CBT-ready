@@ -16,6 +16,11 @@
         state: present
         update_cache: True
         type: pattern
+    - name: update all packages
+      zypper:
+        name: '*'
+        state: latest
+
 - hosts: master
   user: root
   become: True
@@ -27,6 +32,7 @@
         name: "{{ master_packages }}"
         state: present
         update_cache: True
+
 - hosts: client
   user: root
   become: True
