@@ -8,3 +8,4 @@
 - import_playbook: playbooks/deregister.yml
 - import_playbook: playbooks/prepare_disks.yml
 - import_playbook: playbooks/deploy_ses.yml
+- import_playbook: playbooks/prepare_ses_for_cbt.yml

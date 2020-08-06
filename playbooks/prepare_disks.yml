@@ -17,4 +17,12 @@
   tasks:
     - name: mount /dev/sdb1 on master
       command: mount /dev/sdb1 /opt
-      warn: false
+
+    - name: Recursively change ownership of /opt/cbt directory
+      file:
+        path: /opt/cbt
+        state: directory
+        recurse: yes
+        owner: cbt
+        group: cbt
+

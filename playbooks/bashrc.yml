@@ -12,7 +12,10 @@
     - name: bashrc
       copy: 
         content: "{{ bashrc_file }}"
-        dest: /root/.bashrc
-        owner: root
-        group: root
+        dest: "{{item.dest}}"
+        owner: "{{item.owner}}" 
+        group: "{{item.group}}"
         mode: 0644
+      with_items:
+        - {dest: /root/.bashrc, owner: root, group: root}
+        - {dest: /home/cbt/.bashrc, owner: cbt, group: cbt}

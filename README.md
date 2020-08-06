@@ -34,7 +34,7 @@
   Run it like for example:
 
   ```
-  ./cbt.py -a archive/SES7_M18_apollo_librbd -c /etc/ceph/ceph.conf apollo
+  ./cbt.py -a archive/SES7_M18_apollo_librbd -c ceph_cbt.conf apollo.yaml
   ```
 
 
