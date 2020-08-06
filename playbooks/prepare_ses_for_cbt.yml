@@ -1,9 +1,9 @@
-#- hosts: osdnodes
-#  user: root
-#  become: True
-#  tasks:
-#    - name: create partlabels symlinks
-#      script: ../scripts/create_partlabels_symlinks_ses7.sh
+- hosts: osdnodes
+  user: root
+  become: True
+  tasks:
+    - name: create partlabels symlinks
+      script: ../scripts/create_partlabels_symlinks_ses7.sh
 
 - hosts: master
   user: root
