@@ -12,3 +12,20 @@
     - name: create /opt/cbt/ceph_cbt.conf file
       become_user: cbt
       script: ../scripts/create_ceph_cbt_conf.sh
+
+- name: Copy ceph.conf and ceph.client.admin.keyring to "{{groups['client']}}"
+  hosts: client
+  user: root
+  become: True
+  tasks:
+    - name: Copy the file from mwiapp01 to mwiapp02 using Method Push
+      tags: sync-pull
+      synchronize:
+        src: "{{ item }}"
+        dest: "{{ item }}"
+        mode: push
+      delegate_to: "{{groups['master'][0]}}"
+      register: syncfile
+      with_items:
+       - "/etc/ceph/ceph.conf"
+       - "/etc/ceph/ceph.client.admin.keyring"

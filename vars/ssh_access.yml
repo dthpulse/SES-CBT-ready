@@ -1,3 +1,6 @@
 ssh_config: |
    StrictHostKeyChecking no
    UserKnownHostsFile=/dev/null
+users:
+  - cbt
+  - root

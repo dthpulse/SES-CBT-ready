@@ -1,4 +1,4 @@
-scc_reg_key: 'add your key here'
+scc_reg_key: 'put your key here'
 modules:
   - PackageHub/15.2/x86_64
   - sle-module-desktop-applications/15.2/x86_64
