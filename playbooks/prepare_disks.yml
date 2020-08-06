@@ -17,3 +17,4 @@
   tasks:
     - name: mount /dev/sdb1 on master
       command: mount /dev/sdb1 /opt
+      warn: false

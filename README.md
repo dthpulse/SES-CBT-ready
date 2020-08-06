@@ -29,6 +29,13 @@
   ANSIBLE_CONFIG=config/ansible.cfg ansible-playbook main.yml
   ```
 
+- CBT is on apollo.qa.suse.cz:/opt 
+  
+  Run it like for example:
+
+  ```
+  ./cbt.py -a archive/SES7_M18_apollo_librbd -c /etc/ceph/ceph.conf apollo
+  ```
 
 
 

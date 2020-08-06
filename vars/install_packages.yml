@@ -7,6 +7,7 @@ all_nodes_packages:
   - iftop
   - collectl
   - python3-lxml
+  - pdsh
 all_nodes_patterns:
   - devel_basis
 master_packages:
