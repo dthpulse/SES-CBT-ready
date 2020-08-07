@@ -42,6 +42,7 @@
         - "{{ groups['all'] }}"
 
     - name: create ssh config
+      become_user: "{{item}}"
       copy:
         dest: ~/.ssh/config
         content: "{{ ssh_config }}"
