@@ -27,7 +27,7 @@
         user: root
         state: present
         key: "{{ lookup('file','buffer/root-{{item}}-id_rsa.pub')}}"
-      when: item != ansible_fqdn
+#      when: item != ansible_fqdn
       with_items:
         - "{{ groups['all'] }}"
 
@@ -37,7 +37,7 @@
         user: cbt
         state: present
         key: "{{ lookup('file','buffer/cbt-{{item}}-id_rsa.pub')}}"
-      when: item != ansible_fqdn
+#      when: item != ansible_fqdn
       with_items:
         - "{{ groups['all'] }}"
 

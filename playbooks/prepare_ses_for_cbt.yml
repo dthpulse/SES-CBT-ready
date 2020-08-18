@@ -9,9 +9,9 @@
   user: root
   become: True
   tasks:
-    - name: create /opt/cbt/ceph_cbt.conf file
+    - name: create /opt/cbt/ceph.conf file
       become_user: cbt
-      script: ../scripts/create_ceph_cbt_conf.sh
+      script: ../scripts/create_ceph_conf.sh
 
 - name: Copy ceph.conf and ceph.client.admin.keyring to "{{groups['client']}}"
   hosts: client
