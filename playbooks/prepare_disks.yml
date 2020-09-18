@@ -12,17 +12,17 @@
     - name: reboot servers
       reboot:
 
-- hosts: master
-  user: root
-  tasks:
-    - name: mount /dev/sdb1 on master
-      command: mount /dev/sdb1 /opt
-
-    - name: Recursively change ownership of /opt/cbt directory
-      file:
-        path: /opt/cbt
-        state: directory
-        recurse: yes
-        owner: cbt
-        group: cbt
+#- hosts: master
+#  user: root
+#  tasks:
+#    - name: mount /dev/sdb1 on master
+#      command: mount /dev/sdb1 /opt
+#
+#    - name: Recursively change ownership of /opt/cbt directory
+#      file:
+#        path: /opt/cbt
+#        state: directory
+#        recurse: yes
+#        owner: cbt
+#        group: cbt
 

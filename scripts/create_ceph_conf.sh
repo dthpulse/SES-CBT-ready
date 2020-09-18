@@ -10,4 +10,4 @@ for node in ${osd_nodes[*]}; do
     ssh $node "cat /tmp/ceph.conf" 2>/dev/null >> /tmp/ceph.conf
 done
 
-cp /tmp/ceph.conf /opt/cbt/ceph.conf
+#cp /tmp/ceph_cbt.conf /opt/cbt/ceph_cbt.conf
